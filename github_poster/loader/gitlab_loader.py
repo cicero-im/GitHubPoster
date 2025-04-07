@@ -1,11 +1,10 @@
 import time
-
-import requests
 from pendulum import interval, parse
 
 from github_poster.html_parser import GitLabParser
 from github_poster.loader.base_loader import BaseLoader, LoadError
 from github_poster.loader.config import GITLAB_LATEST_URL, GITLAB_ONE_DAY_URL
+from security import safe_requests
 
 
 class GitLabLoader(BaseLoader):
@@ -57,7 +56,7 @@ class GitLabLoader(BaseLoader):
 
     def make_latest_date_dict(self):
         try:
-            r = requests.get(
+            r = safe_requests.get(
                 GITLAB_LATEST_URL.format(
                     gitlab_base_url=self.gitlab_base_url, user_name=self.user_name
                 ),
@@ -76,7 +75,7 @@ class GitLabLoader(BaseLoader):
         p = GitLabParser()
         for d in self.left_dates:
             try:
-                r = requests.get(
+                r = safe_requests.get(
                     GITLAB_ONE_DAY_URL.format(
                         gitlab_base_url=self.gitlab_base_url,
                         user_name=self.user_name,

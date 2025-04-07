@@ -2,10 +2,9 @@ import json
 import os.path
 from datetime import datetime
 
-import requests
-
 from github_poster.loader.base_loader import BaseLoader, LoadError
 from github_poster.loader.config import BBDC_API_URL
+from security import safe_requests
 
 
 class BBDCLoader(BaseLoader):
@@ -62,7 +61,7 @@ class BBDCLoader(BaseLoader):
                 if not self.user_id:
                     raise LoadError("user_id not found in cache.")
 
-        resp = requests.get(BBDC_API_URL.format(user_id=self.user_id))
+        resp = safe_requests.get(BBDC_API_URL.format(user_id=self.user_id))
         if not resp.ok:
             raise LoadError(f"Meet network error. {resp.reason}")
         data = resp.json()
