@@ -15,6 +15,7 @@ setup(
         "svgwrite",
         "pendulum==3.0.0",
         "colour",
+        "defusedxml==0.7.1",
     ],
     extras_require={
         "garmin": ["garminconnect"],
