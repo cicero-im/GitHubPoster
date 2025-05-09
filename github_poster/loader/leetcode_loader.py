@@ -41,7 +41,7 @@ class LeetcodeLoader(BaseLoader):
                 r = requests.get(
                     self.LEETCODE_URL.format(offset=offset, last_key=last_key),
                     cookies={"cookie": self.leetcode_cookie},
-                )
+                timeout=60)
                 if not r.ok:
                     print(r.text)
                     break
