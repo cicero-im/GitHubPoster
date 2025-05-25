@@ -1,6 +1,5 @@
 import json
 import time
-from random import randint
 from re import compile
 
 import pendulum
@@ -14,6 +13,7 @@ from github_poster.html_parser.jike_parse import (
 )
 from github_poster.loader.base_loader import BaseLoader, LoadError
 from github_poster.loader.config import JIKE_GRAPHQL_URL, JIKE_PERSON_URL
+import secrets
 
 
 class JikeLoader(BaseLoader):
@@ -168,7 +168,7 @@ class JikeLoader(BaseLoader):
         if self._check_if_stop(resp_dates) or not next_last_id:
             return resp_data_list
         else:
-            time.sleep(randint(1, 3))
+            time.sleep(secrets.SystemRandom().randint(1, 3))
             return self._request_post_data(next_last_id, resp_data_list)
 
     def _check_if_stop(self, dates):
