@@ -3,10 +3,9 @@
 
 from datetime import datetime
 
-import requests
-
 from github_poster.loader.base_loader import BaseLoader
 from github_poster.loader.config import DOTA2_CALENDAR_API
+from security import safe_requests
 
 
 class Dota2Loader(BaseLoader):
@@ -29,7 +28,7 @@ class Dota2Loader(BaseLoader):
         )
 
     def get_api_data(self):
-        r = requests.get(
+        r = safe_requests.get(
             DOTA2_CALENDAR_API.format(
                 dota2_id=self.dota2_id,
             )

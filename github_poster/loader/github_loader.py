@@ -1,10 +1,9 @@
 from threading import Thread
 
-import requests
-
 from github_poster.html_parser import GitHubParser
 from github_poster.loader.base_loader import BaseLoader, LoadError
 from github_poster.loader.config import GITHUB_CONTRIBUCTIONS_URL
+from security import safe_requests
 
 
 class GitHubLoader(BaseLoader):
@@ -28,7 +27,7 @@ class GitHubLoader(BaseLoader):
     def _make_one_year(self, y):
         p = GitHubParser()
         try:
-            r = requests.get(
+            r = safe_requests.get(
                 GITHUB_CONTRIBUCTIONS_URL.format(
                     user_name=self.user_name,
                     start_day=f"{y}-01-01",

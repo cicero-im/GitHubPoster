@@ -1,7 +1,7 @@
-import requests
 
 from github_poster.loader.base_loader import BaseLoader, LoadError
 from github_poster.loader.config import NEODB_API
+from security import safe_requests
 
 
 class NeoDBLoader(BaseLoader):
@@ -44,7 +44,7 @@ class NeoDBLoader(BaseLoader):
             }
 
             while True:
-                r = requests.get(
+                r = safe_requests.get(
                     url=NEODB_API.format(page=page, type=self.mark_type),
                     headers=headers,
                 )

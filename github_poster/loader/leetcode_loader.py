@@ -1,13 +1,13 @@
 import time
 
 import pendulum
-import requests
 
 from github_poster.loader.base_loader import BaseLoader
 from github_poster.loader.config import (
     LEETCODE_CN_SUBMISSIONS_URL,
     LEETCODE_SUBMISSIONS_URL,
 )
+from security import safe_requests
 
 
 class LeetcodeLoader(BaseLoader):
@@ -38,7 +38,7 @@ class LeetcodeLoader(BaseLoader):
         error_times = 0
         while 1:
             try:
-                r = requests.get(
+                r = safe_requests.get(
                     self.LEETCODE_URL.format(offset=offset, last_key=last_key),
                     cookies={"cookie": self.leetcode_cookie},
                 )

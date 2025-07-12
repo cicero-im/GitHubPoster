@@ -1,9 +1,8 @@
 import time
 
-import requests
-
 from github_poster.loader.base_loader import BaseLoader
 from github_poster.loader.config import SHANBAY_WORD_API
+from security import safe_requests
 
 
 class ShanBayLoader(BaseLoader):
@@ -30,7 +29,7 @@ class ShanBayLoader(BaseLoader):
         datalist = []
         while err_counter < 10:
             url = SHANBAY_WORD_API.format(user_name=self.user_name, page=page)
-            res = requests.get(url)
+            res = safe_requests.get(url)
 
             if not res.ok:
                 print(f"get shanbay word api failed {str(res.text)}")

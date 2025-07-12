@@ -4,10 +4,9 @@ import time
 from collections import defaultdict
 from datetime import datetime, timedelta
 
-import requests
-
 from github_poster.loader.base_loader import BaseLoader, LoadError
 from github_poster.loader.config import WAKATIME_SUMMARY_URL
+from security import safe_requests
 
 
 class WakaTimeLoader(BaseLoader):
@@ -56,7 +55,7 @@ class WakaTimeLoader(BaseLoader):
             start_date = (datetime.now() - timedelta(days=14)).strftime("%Y-%m-%d")
             end_date = datetime.now().strftime("%Y-%m-%d")
 
-        r = requests.get(
+        r = safe_requests.get(
             WAKATIME_SUMMARY_URL.format(
                 wakatime_key=self.wakatime_key,
                 from_year=start_date,

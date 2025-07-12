@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import requests
 
 from github_poster.loader.base_loader import BaseLoader
 from github_poster.loader.config import COVID_API
+from security import safe_requests
 
 
 class CovidLoader(BaseLoader):
@@ -25,7 +25,7 @@ class CovidLoader(BaseLoader):
         )
 
     def get_api_data(self):
-        r = requests.get(COVID_API)
+        r = safe_requests.get(COVID_API)
         if not r.ok:
             print(f"get covid api failed {str(r.text)}")
             return []
