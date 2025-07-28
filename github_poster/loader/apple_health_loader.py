@@ -1,6 +1,5 @@
 import json
 import os
-import xml.etree.ElementTree as ET
 from collections import defaultdict, namedtuple
 from numbers import Number
 from typing import Dict
@@ -8,6 +7,7 @@ from typing import Dict
 import pendulum
 
 from github_poster.loader.base_loader import BaseLoader
+import defusedxml.ElementTree
 
 # func is a lambda that converts the "value" attribute of the record to a numeric value.
 RecordMetadata = namedtuple("RecordMetadata", ["type", "unit", "track_color", "func"])
@@ -113,7 +113,7 @@ class AppleHealthLoader(BaseLoader):
         from_export = defaultdict(int)
 
         in_target_section = False
-        for _, elem in ET.iterparse(self.apple_health_export_file, events=["end"]):
+        for _, elem in defusedxml.ElementTree.iterparse(self.apple_health_export_file, events=["end"]):
             if elem.tag != "Record":
                 continue
 
