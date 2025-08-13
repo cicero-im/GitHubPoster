@@ -30,7 +30,7 @@ class ShanBayLoader(BaseLoader):
         datalist = []
         while err_counter < 10:
             url = SHANBAY_WORD_API.format(user_name=self.user_name, page=page)
-            res = requests.get(url)
+            res = requests.get(url, timeout=60)
 
             if not res.ok:
                 print(f"get shanbay word api failed {str(res.text)}")

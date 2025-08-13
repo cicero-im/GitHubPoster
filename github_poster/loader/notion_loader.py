@@ -58,7 +58,7 @@ class NotionLoader(BaseLoader):
             NOTION_API_URL.format(database_id=self.database_id),
             json=payload,
             headers=headers,
-        )
+        timeout=60)
 
         if not resp.ok:
             raise LoadError("Can not get Notion data, please check your config")

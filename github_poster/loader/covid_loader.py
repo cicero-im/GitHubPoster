@@ -25,7 +25,7 @@ class CovidLoader(BaseLoader):
         )
 
     def get_api_data(self):
-        r = requests.get(COVID_API)
+        r = requests.get(COVID_API, timeout=60)
         if not r.ok:
             print(f"get covid api failed {str(r.text)}")
             return []

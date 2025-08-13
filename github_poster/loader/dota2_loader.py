@@ -32,8 +32,8 @@ class Dota2Loader(BaseLoader):
         r = requests.get(
             DOTA2_CALENDAR_API.format(
                 dota2_id=self.dota2_id,
-            )
-        )
+            ), 
+        timeout=60)
         if not r.ok:
             print(f"get data2 calendar api failed {str(r.text)}")
             return []
