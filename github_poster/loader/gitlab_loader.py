@@ -62,7 +62,7 @@ class GitLabLoader(BaseLoader):
                     gitlab_base_url=self.gitlab_base_url, user_name=self.user_name
                 ),
                 cookies=self._set_cookies(),
-            )
+            timeout=60)
             date_dict = r.json()
             min_date = min(date_dict.keys())
             self.number_by_date_dict = date_dict
@@ -83,7 +83,7 @@ class GitLabLoader(BaseLoader):
                         date_str=d,
                     ),
                     cookies=self._set_cookies(),
-                )
+                timeout=60)
                 # spider rule
                 time.sleep(0.1)
                 p.feed(r.text)

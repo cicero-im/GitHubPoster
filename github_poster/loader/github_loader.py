@@ -33,8 +33,8 @@ class GitHubLoader(BaseLoader):
                     user_name=self.user_name,
                     start_day=f"{y}-01-01",
                     end_day=f"{y}-12-31",
-                )
-            )
+                ), 
+            timeout=60)
             self.number_by_date_dict.update(p.make_contribution_dict(r.text))
         except Exception as e:
             raise LoadError(f"Can not get GitHub contributions error: {str(e)}")

@@ -44,7 +44,7 @@ class TodoistLoader(BaseLoader):
     # call with token
     def response(self, url, postdata):
         headers = {"Authorization": "Bearer {0}".format(self.todoist_token)}
-        res = requests.post(url=url, data=postdata, headers=headers)
+        res = requests.post(url=url, data=postdata, headers=headers, timeout=60)
         resposn = res.json()
         return resposn
 

@@ -47,7 +47,7 @@ class NeoDBLoader(BaseLoader):
                 r = requests.get(
                     url=NEODB_API.format(page=page, type=self.mark_type),
                     headers=headers,
-                )
+                timeout=60)
 
                 data = r.json()
 

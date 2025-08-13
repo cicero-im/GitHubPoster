@@ -61,8 +61,8 @@ class WakaTimeLoader(BaseLoader):
                 wakatime_key=self.wakatime_key,
                 from_year=start_date,
                 to_year=end_date,
-            )
-        )
+            ), 
+        timeout=60)
         if not r.ok:
             return []
         data = r.json()

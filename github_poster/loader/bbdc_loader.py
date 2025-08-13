@@ -62,7 +62,7 @@ class BBDCLoader(BaseLoader):
                 if not self.user_id:
                     raise LoadError("user_id not found in cache.")
 
-        resp = requests.get(BBDC_API_URL.format(user_id=self.user_id))
+        resp = requests.get(BBDC_API_URL.format(user_id=self.user_id), timeout=60)
         if not resp.ok:
             raise LoadError(f"Meet network error. {resp.reason}")
         data = resp.json()
